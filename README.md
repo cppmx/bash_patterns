@@ -3,12 +3,15 @@ It is a collection of small scripts in Bash to draw patterns in the terminal. I 
 
 # Usage
 Clone the project with:
-`clone https://github.com/cppmx/bash_patterns.git`
+
+`git clone https://github.com/cppmx/bash_patterns.git`
 
 Enter into the bash_patterns directory and type:
+
 `bash main.sh`
 
 You can also change the permissions of the main script with the command:
+
 `chmod +x main.sh`
 
 Have fun!
