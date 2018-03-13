@@ -15,6 +15,15 @@
 #  You should have received a copy of the GNU General Public License along
 #  with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+CommonFile=$(pwd)/common.sh
+
+if [ ! -f $CommonFile ]; then
+    echo Missing Common File
+    exit 1
+fi
+
+. $CommonFile
+
 declare -a Options=()
 ExitValue=0
 SelectedOption=-1
@@ -65,15 +74,17 @@ function loop()
         printf "\n\t\e[0mSelect a pattern (0 to list options again): "
         read SelectedOption
 
-        testValue='^[0-9]+$'
-        if ! [[ $SelectedOption =~ $testValue ]] ; then
+        is_number $SelectedOption
+        validate=$?
+
+        if [[ $validate -eq 1 ]]; then
             printf "\t\e[31mPlease type a \e[5mpositive integer value\e[25m\e[0m\n"
             SelectedOption=-1
         elif [[ $SelectedOption -eq 0 ]]; then
             list_options
         elif [[ $SelectedOption -gt 0 && $SelectedOption -le ${#Options[@]} ]]; then
             printf "\n\t\e[34mExecuting ${Options[$[SelectedOption - 1]]} \e[0m...\n"
-            source ${Options[$[SelectedOption - 1]]}/main.sh
+            source ${Options[$[SelectedOption - 1]]}/main.sh $CommonFile
         elif [[ $SelectedOption -ne $ExitValue ]]; then
             printf "\t\e[31mInvalid option, please try again\e[0m\n"
         fi

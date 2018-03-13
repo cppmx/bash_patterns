@@ -15,10 +15,21 @@
 #  You should have received a copy of the GNU General Public License along
 #  with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-echo "Enter the size of X:"
+if [ ! -f $1 ]; then
+    echo Missing Common File
+    exit 1
+fi
+
+. $1
+
+printf "\n\tEnter the size of X: "
 read x_size
 
-if [[ $x_size -gt 0 ]]; then
+is_number $x_size
+validate=$?
+
+if [[ $validate -eq 0 ]]; then
+    echo " "
     for line in `seq 0 $[x_size - 1]`;
     do
         for column in `seq 0 $[x_size - 1]`;
@@ -34,5 +45,5 @@ if [[ $x_size -gt 0 ]]; then
         printf "\n"
     done
 else
-    echo "Pease, use a positive non zero value"
+    echo "Please, use a positive non zero value"
 fi
