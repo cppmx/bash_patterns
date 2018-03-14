@@ -22,28 +22,31 @@ fi
 
 . $1
 
-printf "\n\tEnter the size of the box: "
-read x_size
+x_size=-1
+while [ $x_size -ne 0 ]; do
+    printf "\n\tEnter the size of the box (0 to quit): "
+    read x_size
 
-is_number $x_size
-validate=$?
+    is_number $x_size
+    validate=$?
 
-if [[ $validate -eq 0 ]]; then
-    echo " "
-    for line in `seq 0 $[x_size - 1]`;
-    do
-        for column in `seq 0 $[x_size - 1]`;
+    if [[ $validate -eq 0 ]]; then
+        echo " "
+        for line in `seq 0 $[x_size - 1]`;
         do
-            if [[ $line -eq 0 || $line -eq $[x_size -1] ]]; then
-                printf "\e[91m#"
-            elif [[ $column -eq 0 || $column -eq $[x_size - 1] ]]; then
-                printf "\e[91m#"
-            else
-                printf " "
-            fi
+            for column in `seq 0 $[x_size - 1]`;
+            do
+                if [[ $line -eq 0 || $line -eq $[x_size -1] ]]; then
+                    printf "\e[91m#\e[0m"
+                elif [[ $column -eq 0 || $column -eq $[x_size - 1] ]]; then
+                    printf "\e[91m#\e[0m"
+                else
+                    printf " "
+                fi
+            done
+            printf "\n"
         done
-        printf "\n"
-    done
-else
-    echo "Please, use a positive non zero value"
-fi
+    else
+        printf "\t\e[31mPlease type a \e[5mpositive integer value\e[25m\e[0m\n"
+    fi
+done
