@@ -15,3 +15,7 @@ You can also change the permissions of the main script with the command:
 `chmod +x main.sh`
 
 Have fun!
+
+# News
+
+**03/13/2018**: Added pyramid script 
