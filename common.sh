@@ -20,5 +20,3 @@ function is_number()
 
     return $result
 }
-
-is_number $1

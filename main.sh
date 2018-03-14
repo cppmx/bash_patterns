@@ -64,7 +64,7 @@ function list_options()
         Options[$[Counter-1]]=${i%%/}
         let Counter+=1
     done
-    printf "\t\e[96m$Counter.- \e[0mExit;\n"
+    printf "\t\e[96m$Counter.- \e[0mExit\n"
     ExitValue=$Counter
 }
 
